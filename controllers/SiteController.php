@@ -20,6 +20,12 @@ class SiteController extends Controller
     }
     public function actionIndex()
     {
+        $telegram = \Yii::$app->telegram;
+        var_dump($telegram);
+        $res = $telegram->sendRequest([
+            'chat_id' => $telegram->input->message->chat->id,
+            'text' => "salam"
+        ]);
         $updates = $this->sendRequest('getUpdates', ['offset' => 476511670]);
         foreach ($updates['result'] as $update) {
             $chat_id = $update['message']['chat']['id'];
